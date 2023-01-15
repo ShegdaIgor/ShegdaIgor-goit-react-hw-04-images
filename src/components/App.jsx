@@ -21,10 +21,6 @@ export const App = () => {
     }
     setIsLoading(true);
 
-    // if (prevState.query !== query || prevState.page !== page) {
-    //   setisLoading(true);
-    // }
-
     const fetchImages = async () => {
       try {
         const { hits, totalHits } = await pixabayGetImages(query, page);
@@ -35,9 +31,10 @@ export const App = () => {
           return;
         }
 
-        setImages(prevState => (page === 1 ? hits : [...prevState, ...hits]));
-        setTotalHits(prevState =>
-          page === 1 ? totalHits - hits.length : prevState - hits.length
+        setImages(
+          prevState => (page === 1 ? hits : [...prevState, ...hits]),
+          setTotalHits(totalHits),
+          setError(null)
         );
       } catch (error) {
         setError(error);
@@ -52,7 +49,7 @@ export const App = () => {
   const handleSubmit = query => {
     setQuery(query);
     setPage(1);
-    setError(null);
+    setError('error');
   };
 
   const handleLoadMore = () => {
