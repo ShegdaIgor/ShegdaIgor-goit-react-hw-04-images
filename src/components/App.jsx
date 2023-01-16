@@ -6,6 +6,8 @@ import { pixabayGetImages } from 'services/api';
 import { Loader } from './Loader/Loader';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Notiflix from 'notiflix';
+import { MistakeMessage, EmptyMessage } from './MistakeMessage/MistakeMessage';
 
 export const App = () => {
   const [images, setImages] = useState([]);
@@ -26,16 +28,17 @@ export const App = () => {
         const { hits, totalHits } = await pixabayGetImages(query, page);
 
         if (totalHits === 0) {
-          setTotalHits('error', []);
+          setTotalHits(totalHits);
+          setImages([]);
           setIsLoading(false);
           return;
         }
 
-        setImages(
-          prevState => (page === 1 ? hits : [...prevState, ...hits]),
-          setTotalHits(totalHits),
-          setError(null)
-        );
+        setImages(prevState => (page === 1 ? hits : [...prevState, ...hits]));
+
+        setTotalHits(totalHits);
+
+        setError(null);
       } catch (error) {
         setError(error);
       } finally {
@@ -46,10 +49,14 @@ export const App = () => {
     fetchImages();
   }, [query, page]);
 
-  const handleSubmit = query => {
-    setQuery(query);
+  const handleSubmit = searchQuery => {
+    if (searchQuery === query) {
+      Notiflix.Notify.success(`${searchQuery} are already in the list`);
+      return;
+    }
+    setQuery(searchQuery);
     setPage(1);
-    setError('error');
+    setError(null);
   };
 
   const handleLoadMore = () => {
@@ -59,19 +66,8 @@ export const App = () => {
   return (
     <div className={css.App}>
       <Searchbar onSubmit={handleSubmit} />
-      {error === 'error' && (
-        <p
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: 20,
-            color: '#010101',
-          }}
-        >
-          There is nothing here.
-        </p>
-      )}
+      {error && <MistakeMessage />}
+      {totalHits === 0 && <EmptyMessage />}
       {error === null && <ImageGallery images={images} />}
 
       {isLoading && <Loader />}

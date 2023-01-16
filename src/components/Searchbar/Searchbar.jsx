@@ -17,7 +17,7 @@ export const Searchbar = ({ onSubmit }) => {
     }
 
     onSubmit(query);
-    setQuery(query);
+    setQuery('');
   };
 
   return (
