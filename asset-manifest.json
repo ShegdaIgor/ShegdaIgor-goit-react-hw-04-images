@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ShegdaIgor-goit-react-hw-04-images/static/css/main.3108754c.css",
-    "main.js": "/ShegdaIgor-goit-react-hw-04-images/static/js/main.1acad1ed.js",
+    "main.css": "/ShegdaIgor-goit-react-hw-04-images/static/css/main.37e4222b.css",
+    "main.js": "/ShegdaIgor-goit-react-hw-04-images/static/js/main.f5d141e7.js",
     "index.html": "/ShegdaIgor-goit-react-hw-04-images/index.html",
-    "main.3108754c.css.map": "/ShegdaIgor-goit-react-hw-04-images/static/css/main.3108754c.css.map",
-    "main.1acad1ed.js.map": "/ShegdaIgor-goit-react-hw-04-images/static/js/main.1acad1ed.js.map"
+    "main.37e4222b.css.map": "/ShegdaIgor-goit-react-hw-04-images/static/css/main.37e4222b.css.map",
+    "main.f5d141e7.js.map": "/ShegdaIgor-goit-react-hw-04-images/static/js/main.f5d141e7.js.map"
   },
   "entrypoints": [
-    "static/css/main.3108754c.css",
-    "static/js/main.1acad1ed.js"
+    "static/css/main.37e4222b.css",
+    "static/js/main.f5d141e7.js"
   ]
 }
